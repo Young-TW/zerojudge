@@ -6,21 +6,21 @@ int main()
 {
     int a,b,c,x1,x2,f;
     cin >> a >> b >> c;
-    f = (b*b)-(4*(a*c))
-    f = sqrt(f)
-    x1 = ((2*a*b)+f)/(a*a)
-    x2 = ((2*a*b)-f)/(a*a)
+    f = (b*b)-(4*(a*c));
+    f = sqrt(f);
+    x1 = ((2*a*b)+f)/(a*a);
+    x2 = ((2*a*b)-f)/(a*a);
     if (x1 != x2)
     {
-        cout << "Two different roots x1="<< x1 <<" , x2=" << x2;
+        cout << "Two different roots x1=" << x1 << " , x2=" << x2;
     }
     else if (x1 == x2)
     {
         cout << "Two same roots x=" << x1;
     }
-    else ()
+    else
     {
-        cout << "NO real root"
+        cout << "NO real root";
     }
     return 0;
 }
