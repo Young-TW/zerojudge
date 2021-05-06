@@ -1,36 +1,23 @@
 #include <iostream>
-#include <math.h>
+#include <cmath>
 using namespace std;
 
-int main()
-{
-    int a,b,c,x1,x2,f;
-    cin >> a >> b >> c;
-    f = (b*b)-(4*(a*c));
-    f = sqrt(f);
-    x1 = ((2*a*b)+f)/(a*a);
-    x2 = ((2*a*b)-f)/(a*a);
-    if (x1 != x2)
-    {
-        cout << "Two different roots x1=" << x1 << " , x2=" << x2;
-    }
-    else if (x1 == x2)
-    {
-        cout << "Two same roots x=" << x1;
-    }
-    else
-    {
-        cout << "NO real root";
+int main(){
+    int a,b,c,x1,x2,f,g;
+    while (cin >> a >> b >> c){
+        f = (b*b)-(4*(a*c));
+        g = sqrt(f);
+        x1 = ((-b)+g)/(2*a);
+        x2 = ((-b)-g)/(2*a);
+        if (f > 0){
+            cout << "Two different roots x1=" << x1 << " , x2=" << x2 << endl;
+        }
+        else if (f == 0){
+            cout << "Two same roots x=" << x1 << endl;
+        }
+        else{
+            cout << "No real root";
+        }
     }
     return 0;
 }
-
-/*
-Two different roots x1=?? , x2=??
-
-Two same roots x=??
-
-No real root
-
-PS: 答案均為整數，若有兩個根則大者在前
-*/

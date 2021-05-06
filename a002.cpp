@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 int a,b,c;
-int main()
-{
+int main(){
     cin >>a>>b;
     c=a+b;
     cout <<c;
