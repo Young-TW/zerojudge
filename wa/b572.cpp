@@ -13,7 +13,7 @@ int main(){
         }else{
             cout << "No";
         }
-        cout << endl;
+        if(i<n)cout << endl;
     }
     return 0;
 }
