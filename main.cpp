@@ -2,44 +2,33 @@
 #include <vector>
 using namespace std;
 
+bool pressure(int left,int right,vector<int> trePlace){
+    for(int i=left;i<right;i++){
+        for(int j=0;j<trePlace.size();j++){
+            if(trePlace[j]==i){
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
 int main(){
-    int s,t,n,m,r,a=0;
-    cin >> s >> t >> n >> m >> r;
-    int A[10][100], B[10][100];
-    for(int i=0;i<s;i++){
-        for(int j=0;j<t;j++){
-            cin >> A[i][j];
-            a += A[i][j];
-        }
-    }
-
+    int n,l;
+    int highestTree = 0;
+    cin >> n >> l;
+    vector<int> trePlace(n);
+    vector<int> treHigh(n);
     for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            cin >> B[i][j];
-        }
+        cin >> trePlace[i];
     }
-    int count = 0;
-    int mn = 1e6;
-    for(int x=0;x<=n-s;x++){
-        for(int y=0;y<=m-t;y++){
-            int dist = 0;
-            int b=0;
-            for(int i=0;i<s;i++){
-                for(int j=0;j<t;j++){
-                    dist += (A[i][j] != B[i+x][j+y]);
-                    b += B[i+x][j+y];
-                }
-            }
-            if(dist<=r){
-                count++;
-                mn = min(mn, abs(a-b));
-            }
-        }
+    for(int i=0;i<n;i++){
+        cin >> treHigh[i];
+    }
+    for(int i=0;i<n;i++){
+        if(pressure(trePlace[i]-treHigh[i],treHigh[i],trePlace) || pressure(trePlace[i]-treHigh[i],treHigh[i],trePlace))
+        treHigh[i];
     }
 
-    if(count>0)
-        cout << count << endl << mn << endl;
-    else
-        cout << "0" << endl << "-1" << endl;
     return 0;
 }
