@@ -1,10 +1,7 @@
 #include <iostream>
 using namespace std;
-const int maxn = 1000005;
-int n,l,highest;
-int X[maxn],H[maxn]; // x = place , h = high
-int le[maxn];
-
+int n,l,highest,num;
+int X[100005],H[100005],le[100005];
 
 int main(){
     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
@@ -14,10 +11,8 @@ int main(){
         cin >> X[i];
         le[i]=i-1;
     }
-    for (int i=1; i<=n; i++){
+    for (int i=1; i<=n; i++)
         cin >> H[i];
-    }
-    int num;
     for(int i=1;i<=n;i++){
         if((X[i]-H[i]>=X[le[i]]) || (X[i]+H[i]<=X[i+1])){
             num++;
