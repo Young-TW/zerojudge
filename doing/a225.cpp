@@ -1,22 +1,23 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
 int main(){
     int n,m;
-    int ar[1000];
+    vector<int> ar;
 
     while(cin >> n){
         for(int i=0;i<n;i++){
-            cin >> ar[i];
+            cin >> m;
+            ar.push_back(m);
         }
-        sort(ar[0],ar[n]);
-
+        sort(ar.begin(),ar.end());
+        
         for(int i=0;i<n;i++){
             cout << ar[i] << " ";
         }
         cout << endl;
     }
-    
     return 0;
 }
