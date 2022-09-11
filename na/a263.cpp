@@ -32,3 +32,5 @@ int main(){
     }
     return 0;
 }
+
+// na 95%
