@@ -1,12 +1,11 @@
 #include <iostream>
 #include <vector>
-#define int long long
 using namespace std;
 
 int main(){
     int r,c,m;
     int b[10][10];
-    int mm[10];
+    int mk[10];
 
     cin >> r >> c >> m;
 
@@ -16,8 +15,8 @@ int main(){
         }
     }
 
-    for(int i=0;i<m;i++){
-        cin >> mm[i];
+    for(int k=0;k<m;k++){
+        cin >> mk[k];
     }
 
     
