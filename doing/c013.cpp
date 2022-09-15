@@ -23,3 +23,5 @@ int main(){
     }
     return 0;
 }
+
+// 00488 - Triangle Wave
