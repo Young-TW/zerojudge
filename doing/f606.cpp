@@ -2,6 +2,10 @@
 #include <vector>
 using namespace std;
 
+int cost(int money){
+    
+}
+
 int main(){
     int n,m,k;
     cin >> n >> m >> k;
