@@ -1,10 +1,12 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(zero-judge VERSION 0.1.0)
+project(zerojudge VERSION 0.1.0)
 
 include(CTest)
 enable_testing()
 
-add_executable(zero-judge ./main.cpp)
+include_directories(.)
+
+add_executable(zerojudge ./src/main.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
