@@ -1,16 +1,15 @@
 #include <iostream>
 #include <string>
-using namespace std;
 
-int main(){
-    string n,m;
-    while(cin >> n){
-        if(n=="#")
+int main() {
+    std::string n, m;
+    while (std::cin >> n) {
+        if (n=="#")
             break;
-        cin >> m;
+        std::cin >> m;
         
 
     }
-    
+
     return 0;
 }

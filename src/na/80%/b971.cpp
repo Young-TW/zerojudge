@@ -1,11 +1,11 @@
 #include <iostream>
-using namespace std;
 
-int main(){
-    int f,l,n;
-    cin >> f >> l >> n;
-    for(int i=f;i<=l;i+=n){
-        cout << i << " ";
+int main() {
+    int f, l, n;
+    std::cin >> f >> l >> n;
+    for (int i=f; i<=l; i+=n) {
+        std::cout << i << " ";
     }
+
     return 0;
 }

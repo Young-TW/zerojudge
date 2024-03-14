@@ -1,7 +1,6 @@
-#include "bits/stdc++.h"
-using namespace std;
+#include <iostream>
 
-int main(){
-    cout << "Hello, world!";
+int main() {
+    std::cout << "Hello, world!";
     return 0;
 }

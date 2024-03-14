@@ -1,24 +1,25 @@
 #include <iostream>
 #include <vector>
-using namespace std;
 
-int main(){
-    int n,x,y;
+int main() {
+    int n, x, y;
     char index;
-    cin >> n;
-    x=n;
-    y=n;
-    vector<vector<char>> v;
+    std::cin >> n;
+    x = n;
+    y = n;
+    std::vector<std::vector<char>> v;
 
-    while(y>0){
-        x=n;
-        while(x>0){
-            cin >> index;
+    while (y > 0) {
+        x = n;
+        while (x > 0) {
+            std::cin >> index;
             v[y][x] = index;
             x--;
         }
+
         y--;
     }
+
     return 0;
 }
 
