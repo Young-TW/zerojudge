@@ -1,15 +1,16 @@
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
     int num;
-    while(cin >> num){
-        for(int i=1;i<num;i++){
-            if(i%7==0)
+    while (std::cin >> num) {
+        for (int i=1; i<num; i++) {
+            if (i%7 == 0)
                 continue;
-            cout << i << " ";
+            std::cout << i << " ";
         }
-        cout << endl;
+
+        std::cout << std::endl;
     }
+
     return 0;
 }

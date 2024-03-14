@@ -1,10 +1,11 @@
 #include<iostream>
-using namespace std;
-int main(){
+
+int main() {
     int n;
-    while (cin >> n){
-        n = n*n-n+2;
-        cout << n << endl;
+    while (std::cin >> n) {
+        n = n*n - n + 2;
+        std::cout << n << std::endl;
     }
+
     return 0;
 }

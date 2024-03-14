@@ -1,10 +1,10 @@
 #include <iostream>
-using namespace std;
 
-int main(){
+int main() {
     int n;
-    while(cin >> n){
-        cout << (n*n*n+5*n+6)/6 << endl;
+    while (std::cin >> n) {
+        std::cout << (n*n*n + 5*n + 6) / 6 << std::endl;
     }
+
     return 0;
 }

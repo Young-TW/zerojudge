@@ -1,17 +1,17 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
-using namespace std;
 
-int main(){
-    string str;
-    cin >> str;
-    string str2 = str;
-    reverse(str2.begin(),str2.end());
-    if(str==str2){
-        cout << "yes";
-    }else{
-        cout << "no";
+int main() {
+    std::string str;
+    std::cin >> str;
+    std::string str2 = str;
+    reverse(str2.begin(), str2.end());
+    if (str == str2) {
+        std::cout << "yes";
+    } else {
+        std::cout << "no";
     }
+
     return 0;
 }

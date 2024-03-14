@@ -1,14 +1,14 @@
-#include <iostream> 
-using namespace std;
-int main(){
+#include <iostream>
+
+int main() {
     int x;
-    while (cin >> x){
-        if ((x%4 == 0 && x%100 != 0) || x%400 == 0){
-            cout <<"閏年\n"; 
-        }
-        else{
-            cout <<"平年\n";
+    while (std::cin >> x) {
+        if ((x%4 == 0 && x%100 != 0) || x%400 == 0) {
+            std::cout <<"閏年\n";
+        } else {
+            std::cout <<"平年\n";
         }
     }
+
     return 0;
 }

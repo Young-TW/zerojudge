@@ -1,8 +1,9 @@
 #include <iostream>
-using namespace std;
-char a[20];
-int main(){
-    cin >> a;
-    cout <<"hello, "<<a;
+#include <string>
+
+int main() {
+    std::string str;
+    std::cin >> str;
+    std::cout << "hello, " << str;
     return 0;
 }

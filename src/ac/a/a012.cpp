@@ -1,14 +1,14 @@
 #include <iostream>
-using namespace std;
 
-int main(){
-    long long int a,b;
-    while(cin >> a >> b){
-        if(a>b){
-            cout << a-b << endl;
-        }else{
-            cout << b-a << endl;
+int main() {
+    long long int a, b;
+    while(std::cin >> a >> b){
+        if (a > b) {
+            std::cout << a - b << std::endl;
+        } else {
+            std::cout << b - a << std::endl;
         }
     }
+
     return 0;
 }

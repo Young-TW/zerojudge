@@ -1,9 +1,9 @@
 #include <iostream>
-using namespace std;
-int a,b,c;
-int main(){
-    cin >>a>>b;
-    c=a+b;
-    cout <<c;
+
+int main() {
+    int a, b, c;
+    std::cin >> a >> b;
+    c = a + b;
+    std::cout << c;
     return 0;
 }
