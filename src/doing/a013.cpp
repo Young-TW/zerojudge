@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 #include <string>
 
@@ -7,9 +8,10 @@ int main() {
         if (n=="#")
             break;
         std::cin >> m;
-        
+
 
     }
 
     return 0;
 }
+*/

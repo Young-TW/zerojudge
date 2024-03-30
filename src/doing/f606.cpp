@@ -1,8 +1,9 @@
+/*
 #include <iostream>
 #include <vector>
 
 int cost(int money) {
-    
+
 }
 
 int main() {
@@ -17,9 +18,10 @@ int main() {
 
     for (int i=0; i<k; i++) {
         for (int j=0; j<n; j++) {
-            
+
         }
     }
 
     return 0;
 }
+*/
