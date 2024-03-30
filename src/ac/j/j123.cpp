@@ -1,17 +1,16 @@
 #include <iostream>
 #include <vector>
-using namespace std;
 
-int main(){
+int main() {
     char t;
-    int r,c,n,y,pack=0,high,blocks=0;
-    cin >> r >> c >> n;
-    vector<int> box(r);
-    for(int i=0;i<n;i++){
-        cin >> t >> y;
+    int r, c, n, y, pack=0, high, blocks=0;
+    std::cin >> r >> c >> n;
+    std::vector<int> box(r);
+    for(int i=0; i<n; i++) {
+        std::cin >> t >> y;
         switch(t){
             case 'A':
-                high = max(max(box[y],box[y+1]),max(box[y+2],box[y+3]))+1;
+                high = std::max(std::max(box[y], box[y+1]), std::max(box[y+2], box[y+3]))+1;
                 if(high <= c){
                     for(int j=0;j<4;j++){
                         box[y+j] = high;
@@ -28,7 +27,7 @@ int main(){
                 }
                 break;
             case 'C':
-                high = max(box[y],box[y+1])+2;
+                high = std::max(box[y],box[y+1])+2;
                 if(high <= c){
                     blocks += 4;
                     box[y] = high;
@@ -37,7 +36,7 @@ int main(){
                 }
                 break;
             case 'D':
-                high = max(box[y]-2,box[y+1])+3;
+                high = std::max(box[y]-2,box[y+1])+3;
                 if(high <= c){
                     blocks += 4;
                     box[y] = high;
@@ -46,7 +45,7 @@ int main(){
                 }
                 break;
             case 'E':
-                high = max(max(box[y]-1,box[y+1]),box[y+2])+2;
+                high = std::max(std::max(box[y]-1,box[y+1]),box[y+2])+2;
                 if(high <= c){
                     blocks += 5;
                     box[y] = high;
@@ -57,6 +56,7 @@ int main(){
                 break;
         }
     }
-    cout << (r*c)-blocks << " " << n-pack << endl;
+
+    std::cout << (r*c)-blocks << " " << n-pack << std::endl;
     return 0;
 }

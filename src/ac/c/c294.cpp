@@ -1,26 +1,24 @@
 #include <iostream>
-using namespace std;
 
-int main(){
-    int a,b,c;
-    cin >> a >> b >> c;
-    if(a>b)
-        swap(a,b);
-    if(b>c)
-        swap(b,c);
-    if(a>b)
-        swap(a,b);
-    
-    cout << a << " " << b << " " << c << endl;
-    
-    if(a+b<=c){
-        cout << "No";
-    }else if((a*a)+(b*b)<c*c){
-        cout << "Obtuse";
-    }else if((a*a)+(b*b)==c*c){
-        cout << "Right";
-    }else if((a*a)+(b*b)>c*c){
-        cout << "Acute";
+int main() {
+    int a, b, c;
+    std::cin >> a >> b >> c;
+
+    if (a > b) std::swap(a,b);
+    if (b > c) std::swap(b,c);
+    if (a > b) std::swap(a,b);
+
+    std::cout << a << " " << b << " " << c << std::endl;
+
+    if (a + b <= c) {
+        std::cout << "No";
+    } else if ((a*a) + (b*b) < c*c) {
+        std::cout << "Obtuse";
+    } else if ((a*a) + (b*b) == c*c) {
+        std::cout << "Right";
+    } else if ((a*a) + (b*b) > c*c) {
+        std::cout << "Acute";
     }
+
     return 0;
 }
