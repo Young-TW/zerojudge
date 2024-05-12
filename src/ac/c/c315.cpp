@@ -1,12 +1,12 @@
 #include <iostream>
 using namespace std;
 
-int main(){
-    int n,a,b,x=0,y=0;
+int main() {
+    int n, a, b, x = 0, y = 0;
     cin >> n;
-    for(int i=0;i<n;i++){
+    for (int i = 0; i < n; i++) {
         cin >> a >> b;
-        switch(a){
+        switch (a) {
             case 0:
                 y += b;
                 break;

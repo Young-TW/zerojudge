@@ -1,17 +1,17 @@
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 #include <vector>
 
 int main() {
     int people, temp;
     std::vector<int> value;
     std::cin >> people;
-    for (int i=0; i<people; i++) {
+    for (int i = 0; i < people; i++) {
         std::cin >> temp;
         value.push_back(temp);
     }
 
-    sort(value.begin(),value.end());
+    sort(value.begin(), value.end());
     for (auto i : value) {
         std::cout << i << " ";
     }
@@ -32,7 +32,7 @@ int main() {
     if (u) {
         std::cout << "best case" << std::endl;
     } else {
-        std::cout << *(l-1) << std::endl;
+        std::cout << *(l - 1) << std::endl;
     }
 
     if (d) {

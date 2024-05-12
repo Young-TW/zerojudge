@@ -2,9 +2,9 @@
 #include <string>
 using namespace std;
 
-int main(){
+int main() {
     string a;
-    getline(cin,a);
+    getline(cin, a);
     cout << a << " " << a;
     return 0;
 }

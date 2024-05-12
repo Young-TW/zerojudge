@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int a,b;
+int a, b;
 
 int gcd(int a, int b) {
     while (b > 0) {
@@ -17,6 +17,6 @@ int gcd(int a, int b) {
 
 int main() {
     cin >> a >> b;
-    cout << gcd(a,b);
+    cout << gcd(a, b);
     return 0;
 }

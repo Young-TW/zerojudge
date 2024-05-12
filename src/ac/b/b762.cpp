@@ -2,11 +2,11 @@
 #include <string>
 using namespace std;
 
-int k=0,d=0,a=0;
+int k = 0, d = 0, a = 0;
 
-void die(int combo){
+void die(int combo) {
     d++;
-    if(combo <= 2){
+    if (combo <= 2) {
         cout << "You have been slained." << endl;
         return;
     }
@@ -14,55 +14,54 @@ void die(int combo){
     return;
 }
 
-void kill(int combo){
+void kill(int combo) {
     k++;
     combo++;
-    if(combo <= 2){
+    if (combo <= 2) {
         cout << "You have slain an enemie." << endl;
         return;
     }
-    if(combo == 3){
+    if (combo == 3) {
         cout << "KILLING SPREE!" << endl;
         return;
     }
-    if(combo == 4){
+    if (combo == 4) {
         cout << "RAMPAGE~" << endl;
         return;
     }
-    if(combo == 5){
+    if (combo == 5) {
         cout << "UNSTOPPABLE!" << endl;
         return;
     }
-    if(combo == 6){
+    if (combo == 6) {
         cout << "DOMINATING!" << endl;
         return;
     }
-    if(combo == 7){
+    if (combo == 7) {
         cout << "GUALIKE!" << endl;
         return;
     }
-    if(combo >= 8){
+    if (combo >= 8) {
         cout << "LEGENDARY!" << endl;
         return;
     }
     return;
 }
 
-int main(){
-    int n,combo=0;
+int main() {
+    int n, combo = 0;
     string status;
     cin >> n;
-    for(int i=0;i<n;i++){
+    for (int i = 0; i < n; i++) {
         cin >> status;
-        if(status == "Get_Kill"){
+        if (status == "Get_Kill") {
             kill(combo);
             combo++;
         }
-        if(status == "Get_Assist")
-            a++;
-        if(status == "Die"){
+        if (status == "Get_Assist") a++;
+        if (status == "Die") {
             die(combo);
-            combo=0;
+            combo = 0;
         }
     }
     cout << k << "/" << d << "/" << a;

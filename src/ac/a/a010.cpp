@@ -1,6 +1,6 @@
 #include <iostream>
 
-int main(){
+int main() {
     long long n;
     std::cin >> n;
     long long num = 2;
@@ -15,10 +15,10 @@ int main(){
 
         if (count > 1 && first_time) {
             std::cout << num << "^" << count;
-            first_time=0;
+            first_time = 0;
         } else if (count == 1 && first_time) {
             std::cout << num;
-            first_time=0;
+            first_time = 0;
         } else if (count > 1 && !first_time) {
             std::cout << " * " << num << "^" << count;
         } else if (count == 1 && !first_time) {

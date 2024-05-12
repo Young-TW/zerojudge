@@ -1,12 +1,12 @@
 #include <iostream>
 
-int main(){
+int main() {
     int n;
     bool a, b, c;
     int d[14];
     std::cin >> n;
-    for (int i=0; i<n; i++) {
-        for (int j=0; j<14; j++) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < 14; j++) {
             std::cin >> d[j];
         }
 
@@ -16,7 +16,7 @@ int main(){
         if (a) std::cout << "A";
         if (b) std::cout << "B";
         if (c) std::cout << "C";
-        if (a==0 && b==0 && c==0) std::cout << "None";
+        if (a == 0 && b == 0 && c == 0) std::cout << "None";
         std::cout << std::endl;
     }
 

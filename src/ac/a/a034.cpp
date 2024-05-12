@@ -1,14 +1,14 @@
 #include <iostream>
 
-void toBinary(int num){
+void toBinary(int num) {
     int i;
     int ar[32];
-    for (i=0; num>0; i++) {
+    for (i = 0; num > 0; i++) {
         ar[i] = num % 2;
         num = num / 2;
     }
 
-    for (int n=i-1; n>=0; n--) {
+    for (int n = i - 1; n >= 0; n--) {
         std::cout << ar[n];
     }
 

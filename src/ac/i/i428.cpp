@@ -6,10 +6,10 @@ int pl(int n) {
 }
 
 int main() {
-    int n, lx, ly, x, y, maxx=0, minn=INT_MAX;
+    int n, lx, ly, x, y, maxx = 0, minn = INT_MAX;
     std::cin >> n;
     int d;
-    for (int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         std::cin >> x >> y;
         if (i == 0) {
             lx = x;
@@ -17,11 +17,11 @@ int main() {
             continue;
         }
 
-        d = pl(x-lx)+pl(y-ly);
+        d = pl(x - lx) + pl(y - ly);
         lx = x;
         ly = y;
-        maxx = std::max(maxx,d);
-        minn = std::min(minn,d);
+        maxx = std::max(maxx, d);
+        minn = std::min(minn, d);
     }
 
     std::cout << maxx << " " << minn << std::endl;

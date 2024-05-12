@@ -1,13 +1,13 @@
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 using namespace std;
 
-int main(){
-    double h,w,ans;
+int main() {
+    double h, w, ans;
     cin >> w >> h;
-    h = h/100;
-    h = h*h;
-    ans = w/h;
+    h = h / 100;
+    h = h * h;
+    ans = w / h;
     cout << fixed << setprecision(1) << ans;
     return 0;
 }

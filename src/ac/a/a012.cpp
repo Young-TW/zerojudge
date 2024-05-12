@@ -2,7 +2,7 @@
 
 int main() {
     long long int a, b;
-    while(std::cin >> a >> b){
+    while (std::cin >> a >> b) {
         if (a > b) {
             std::cout << a - b << std::endl;
         } else {
