@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 int f(int i) {
     if (i == 1 || i == 0) {
@@ -10,8 +9,8 @@ int f(int i) {
 
 int main() {
     int n;
-    while (cin >> n) {
-        cout << f(n) << endl;
+    while (std::cin >> n) {
+        std::cout << f(n) << std::endl;
     }
     return 0;
 }

@@ -1,15 +1,14 @@
 #include <iostream>
-using namespace std;
 
 int main() {
     int day;
     int manto;
     long long int tt = 0;
-    cin >> day;
+    std::cin >> day;
     for (int i = 1; i <= day; i++) {
-        cin >> manto;
+        std::cin >> manto;
         tt += (i * manto);
     }
-    cout << tt << endl;
+    std::cout << tt << std::endl;
     return 0;
 }

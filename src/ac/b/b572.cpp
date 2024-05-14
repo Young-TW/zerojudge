@@ -1,18 +1,17 @@
 #include <iostream>
-using namespace std;
 
 int main() {
     int n;
     short m1, m2, h1, h2, t;
-    cin >> n;
+    std::cin >> n;
     for (int i = 0; i < n; i++) {
-        cin >> h1 >> m1 >> h2 >> m2 >> t;
+        std::cin >> h1 >> m1 >> h2 >> m2 >> t;
         m1 = 60 * h1 + m1;
         m2 = 60 * h2 + m2;
         if (t > m2 - m1) {
-            cout << "No" << endl;
+            std::cout << "No" << std::endl;
         } else {
-            cout << "Yes" << endl;
+            std::cout << "Yes" << std::endl;
         }
     }
     return 0;

@@ -1,13 +1,12 @@
 #include <iostream>
-using namespace std;
 
 int main() {
     double r;
-    while (cin >> r) {
+    while (std::cin >> r) {
         r *= 9;
         r /= 5;
         r += 32;
-        cout << r << endl;
+        std::cout << r << std::endl;
     }
     return 0;
 }

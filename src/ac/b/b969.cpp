@@ -1,13 +1,12 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-using namespace std;
 
 int main() {
-    string s1, s2, name;
-    getline(cin, s1);
-    getline(cin, s2);
-    stringstream ss(s1);
-    while (ss >> name) cout << s2 << ", " << name << endl;
+    std::string s1, s2, name;
+    getline(std::cin, s1);
+    getline(std::cin, s2);
+    std::stringstream ss(s1);
+    while (ss >> name) std::cout << s2 << ", " << name << std::endl;
     return 0;
 }

@@ -1,12 +1,10 @@
 #include <iostream>
-using namespace std;
-
 int main() {
     int n, m;
-    cin >> n;
+    std::cin >> n;
     bool prime = 0;
     for (int i = 0; i < n; i++) {
-        cin >> m;
+        std::cin >> m;
         for (int j = 2; j < m / 2; j++) {
             if (m % j == 0) {
                 prime = 1;
@@ -14,9 +12,9 @@ int main() {
         }
 
         if (!prime)
-            cout << "Y" << endl;
+            std::cout << "Y" << std::endl;
         else
-            cout << "N" << endl;
+            std::cout << "N" << std::endl;
         prime = 0;
     }
     return 0;

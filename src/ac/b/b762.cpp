@@ -1,16 +1,15 @@
 #include <iostream>
 #include <string>
-using namespace std;
 
 int k = 0, d = 0, a = 0;
 
 void die(int combo) {
     d++;
     if (combo <= 2) {
-        cout << "You have been slained." << endl;
+        std::cout << "You have been slained." << std::endl;
         return;
     }
-    cout << "SHUTDOWN." << endl;
+    std::cout << "SHUTDOWN." << std::endl;
     return;
 }
 
@@ -18,31 +17,31 @@ void kill(int combo) {
     k++;
     combo++;
     if (combo <= 2) {
-        cout << "You have slain an enemie." << endl;
+        std::cout << "You have slain an enemie." << std::endl;
         return;
     }
     if (combo == 3) {
-        cout << "KILLING SPREE!" << endl;
+        std::cout << "KILLING SPREE!" << std::endl;
         return;
     }
     if (combo == 4) {
-        cout << "RAMPAGE~" << endl;
+        std::cout << "RAMPAGE~" << std::endl;
         return;
     }
     if (combo == 5) {
-        cout << "UNSTOPPABLE!" << endl;
+        std::cout << "UNSTOPPABLE!" << std::endl;
         return;
     }
     if (combo == 6) {
-        cout << "DOMINATING!" << endl;
+        std::cout << "DOMINATING!" << std::endl;
         return;
     }
     if (combo == 7) {
-        cout << "GUALIKE!" << endl;
+        std::cout << "GUALIKE!" << std::endl;
         return;
     }
     if (combo >= 8) {
-        cout << "LEGENDARY!" << endl;
+        std::cout << "LEGENDARY!" << std::endl;
         return;
     }
     return;
@@ -50,10 +49,10 @@ void kill(int combo) {
 
 int main() {
     int n, combo = 0;
-    string status;
-    cin >> n;
+    std::string status;
+    std::cin >> n;
     for (int i = 0; i < n; i++) {
-        cin >> status;
+        std::cin >> status;
         if (status == "Get_Kill") {
             kill(combo);
             combo++;
@@ -64,6 +63,6 @@ int main() {
             combo = 0;
         }
     }
-    cout << k << "/" << d << "/" << a;
+    std::cout << k << "/" << d << "/" << a;
     return 0;
 }

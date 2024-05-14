@@ -1,24 +1,23 @@
 #include <algorithm>
 #include <iostream>
 #include <vector>
-using namespace std;
 
 int main() {
     int n, x, y, reg;
-    vector<int> ar, revar;
-    cin >> n;
+    std::vector<int> ar, revar;
+    std::cin >> n;
     for (int i = 0; i < n; i++) {
-        cin >> x >> y;
+        std::cin >> x >> y;
         for (int j = 0; j < x * y; j++) {
-            cin >> reg;
+            std::cin >> reg;
             ar.push_back(reg);
         }
         revar = ar;
         reverse(revar.begin(), revar.end());
         if (revar == ar) {
-            cout << "go forward" << endl;
+            std::cout << "go forward" << std::endl;
         } else {
-            cout << "keep defending" << endl;
+            std::cout << "keep defending" << std::endl;
         }
         ar.clear();
     }
