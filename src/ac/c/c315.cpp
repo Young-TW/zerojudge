@@ -1,11 +1,10 @@
 #include <iostream>
-using namespace std;
 
 int main() {
     int n, a, b, x = 0, y = 0;
-    cin >> n;
+    std::cin >> n;
     for (int i = 0; i < n; i++) {
-        cin >> a >> b;
+        std::cin >> a >> b;
         switch (a) {
             case 0:
                 y += b;
@@ -21,6 +20,6 @@ int main() {
                 break;
         }
     }
-    cout << x << " " << y;
+    std::cout << x << " " << y;
     return 0;
 }

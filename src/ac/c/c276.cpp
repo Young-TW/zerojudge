@@ -1,13 +1,12 @@
 #include <iostream>
 #include <string>
-using namespace std;
 
 int main() {
-    string num, temp;
+    std::string num, temp;
     int n, a, b;
-    cin >> num >> n;
+    std::cin >> num >> n;
     for (int i = 0; i < n; i++) {
-        cin >> temp;
+        std::cin >> temp;
         a = 0;
         b = 0;
         for (int j = 0; j < 4; j++) {
@@ -21,7 +20,7 @@ int main() {
                 }
             }
         }
-        cout << a << "A" << b << "B" << endl;
+        std::cout << a << "A" << b << "B" << std::endl;
     }
     return 0;
 }

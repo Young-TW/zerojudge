@@ -1,10 +1,9 @@
 #include <iostream>
 #include <string>
-using namespace std;
 
 int main() {
-    string a;
-    getline(cin, a);
-    cout << "Hey " << a;
+    std::string a;
+    getline(std::cin, a);
+    std::cout << "Hey " << a;
     return 0;
 }

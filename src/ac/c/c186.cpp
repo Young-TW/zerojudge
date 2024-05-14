@@ -1,11 +1,10 @@
 #include <iostream>
 #include <string>
-using namespace std;
 
 int main() {
-    string a;
-    while (cin >> a) {
-        cout << a << endl;
+    std::string a;
+    while (std::cin >> a) {
+        std::cout << a << std::endl;
     }
     return 0;
 }

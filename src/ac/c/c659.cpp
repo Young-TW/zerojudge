@@ -1,16 +1,15 @@
 #include <iostream>
 #include <string>
-using namespace std;
 
 int main() {
-    string n, m;
+    std::string n, m;
     int i = 0;
-    cin >> n;
-    while (cin >> m) {
+    std::cin >> n;
+    while (std::cin >> m) {
         if (i) {
-            cout << " " << n << " ";
+            std::cout << " " << n << " ";
         }
-        cout << m;
+        std::cout << m;
         i++;
     }
     return 0;
