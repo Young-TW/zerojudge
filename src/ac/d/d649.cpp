@@ -1,21 +1,20 @@
 #include <iostream>
-using namespace std;
 
 int main() {
     int n, m;
-    while (cin >> n) {
+    while (std::cin >> n) {
         if (n == 0) break;
         for (int i = 0; i < n; i++) {
             m = n - i - 1;
             for (int a = 0; a < m; a++) {
-                cout << "_";
+                std::cout << "_";
             }
             for (int b = 0; b < i + 1; b++) {
-                cout << "+";
+                std::cout << "+";
             }
-            cout << endl;
+            std::cout << std::endl;
         }
-        cout << endl;
+        std::cout << std::endl;
     }
     return 0;
 }

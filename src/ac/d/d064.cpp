@@ -1,13 +1,12 @@
 #include <iostream>
-using namespace std;
 
 int main() {
     int a;
-    cin >> a;
+    std::cin >> a;
     if (a % 2 == 0) {
-        cout << "Even";
+        std::cout << "Even";
     } else {
-        cout << "Odd";
+        std::cout << "Odd";
     }
     return 0;
 }

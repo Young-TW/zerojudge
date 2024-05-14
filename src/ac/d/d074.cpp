@@ -1,15 +1,14 @@
 #include <iostream>
-using namespace std;
 
 int main() {
     int n, reg, max = 0;
-    cin >> n;
+    std::cin >> n;
     for (int i = 0; i < n; i++) {
-        cin >> reg;
+        std::cin >> reg;
         if (reg > max) {
             max = reg;
         }
     }
-    cout << max;
+    std::cout << max;
     return 0;
 }
