@@ -1,21 +1,19 @@
 #include <iostream>
-#include <vector>
-using namespace std;
 
 int main() {
     int s, t, n, m, r, a = 0;
-    cin >> s >> t >> n >> m >> r;
+    std::cin >> s >> t >> n >> m >> r;
     int A[10][100], B[10][100];
     for (int i = 0; i < s; i++) {
         for (int j = 0; j < t; j++) {
-            cin >> A[i][j];
+            std::cin >> A[i][j];
             a += A[i][j];
         }
     }
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
-            cin >> B[i][j];
+            std::cin >> B[i][j];
         }
     }
     int count = 0;
@@ -32,14 +30,14 @@ int main() {
             }
             if (dist <= r) {
                 count++;
-                mn = min(mn, abs(a - b));
+                mn = std::min(mn, abs(a - b));
             }
         }
     }
 
     if (count > 0)
-        cout << count << endl << mn << endl;
+        std::cout << count << std::endl << mn << std::endl;
     else
-        cout << "0" << endl << "-1" << endl;
+        std::cout << "0" << std::endl << "-1" << std::endl;
     return 0;
 }

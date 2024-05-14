@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-using namespace std;
 
 int judge(int a, int b) {
     if (a == b) return 0;            // 平手
@@ -10,22 +9,24 @@ int judge(int a, int b) {
     if (b == 0 && a == 2) return 2;  // b獲勝
     if (b == 2 && a == 5) return 2;
     if (b == 5 && a == 0) return 2;
+    return 0;
 }
 
 int win(int a) {
     if (a == 0) return 5;
     if (a == 2) return 0;
     if (a == 5) return 2;
+    return 0;
 }
 
 int main() {
     int f, n, reg;
-    vector<int> y;
+    std::vector<int> y;
 
-    cin >> f;
-    cin >> n;
+    std::cin >> f;
+    std::cin >> n;
     for (int i = 0; i < n; i++) {
-        cin >> reg;
+        std::cin >> reg;
         y.push_back(reg);
     }
     y.push_back(1);
@@ -37,23 +38,23 @@ int main() {
             else
                 f = y[round - 1];
         }
-        cout << f << " ";
+        std::cout << f << " ";
 
         switch (judge(f, y[round])) {
             case 0:
                 break;
             case 1:
-                cout << ": Won at round " << round + 1;
+                std::cout << ": Won at round " << round + 1;
                 break;
             case 2:
-                cout << ": Lost at round " << round + 1;
+                std::cout << ": Lost at round " << round + 1;
                 break;
         }
 
         if (judge(f, y[round]) != 0) break;
 
         if (y[round + 1] == 1) {
-            cout << ": Drew at round " << round + 1;
+            std::cout << ": Drew at round " << round + 1;
             break;
         }
 
