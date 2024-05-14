@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 int main() {
     int sum1, sum2, point1 = 0, point2 = 0;
@@ -9,7 +8,7 @@ int main() {
         sum2 = 0;
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 4; j++) {
-                cin >> input;
+                std::cin >> input;
                 if (i == 0) {
                     sum1 += input;
                 } else {
@@ -17,7 +16,7 @@ int main() {
                 }
             }
         }
-        cout << sum1 << ":" << sum2 << endl;
+        std::cout << sum1 << ":" << sum2 << std::endl;
         if (sum1 > sum2) {
             point1++;
         } else {
@@ -25,11 +24,11 @@ int main() {
         }
     }
     if (point1 > point2) {
-        cout << "Win";
+        std::cout << "Win";
     } else if (point1 == point2) {
-        cout << "Tie";
+        std::cout << "Tie";
     } else {
-        cout << "Lose";
+        std::cout << "Lose";
     }
     return 0;
 }

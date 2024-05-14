@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 int f(int x) {
     if (x == 1)
@@ -12,7 +11,7 @@ int f(int x) {
 
 int main() {
     int n;
-    cin >> n;
-    cout << f(n);
+    std::cin >> n;
+    std::cout << f(n);
     return 0;
 }

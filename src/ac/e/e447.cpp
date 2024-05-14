@@ -1,23 +1,22 @@
 #include <iostream>
 #include <queue>
-using namespace std;
 
 int main() {
-    queue<int> nums;
+    std::queue<int> nums;
     int n, k, x;
-    cin >> n;
+    std::cin >> n;
     for (int i = 0; i < n; i++) {
-        cin >> k;
+        std::cin >> k;
         switch (k) {
             case 1:
-                cin >> x;
+                std::cin >> x;
                 nums.push(x);
                 break;
             case 2:
                 if (nums.empty())
-                    cout << "-1" << endl;
+                    std::cout << "-1" << std::endl;
                 else
-                    cout << nums.front() << endl;
+                    std::cout << nums.front() << std::endl;
                 break;
             case 3:
                 if (nums.empty())

@@ -1,14 +1,13 @@
 #include <iostream>
 #include <string>
-using namespace std;
 
 int main() {
-    string str;
-    cin >> str;
-    cout << str.front();
+    std::string str;
+    std::cin >> str;
+    std::cout << str.front();
     for (int i = 0; i < str.length() - 2; i++) {
-        cout << '_';
+        std::cout << '_';
     }
-    cout << str.back();
+    std::cout << str.back();
     return 0;
 }
