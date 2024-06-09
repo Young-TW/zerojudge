@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 int a, b;
 
@@ -8,7 +7,7 @@ int gcd(int a, int b) {
         if (a > b) {
             a = a % b;
         } else {
-            swap(a, b);
+            std::swap(a, b);
         }
     }
 
@@ -16,7 +15,7 @@ int gcd(int a, int b) {
 }
 
 int main() {
-    cin >> a >> b;
-    cout << gcd(a, b);
+    std::cin >> a >> b;
+    std::cout << gcd(a, b);
     return 0;
 }

@@ -1,19 +1,18 @@
 #include <iostream>
-using namespace std;
 
 int main() {
     double n, tt, reg;
-    while (cin >> n) {
+    while (std::cin >> n) {
         tt = 0;
         for (int i = 0; i < n; i++) {
-            cin >> reg;
+            std::cin >> reg;
             tt += reg;
         }
 
         if ((tt / n) > 59)
-            cout << "no" << endl;
+            std::cout << "no" << std::endl;
         else
-            cout << "yes" << endl;
+            std::cout << "yes" << std::endl;
     }
 
     return 0;
