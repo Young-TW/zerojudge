@@ -1,14 +1,15 @@
 #include <iostream>
+#include <string>
 
 int main() {
     std::string a;
     while (std::getline(std::cin, a)) {
-        for (int x = 0; x < a.length(); x++) {
-            std::cout << char(a[x] - 7);
+        if (!a.empty() && a.back() == '\r') a.pop_back();
+        for (char c : a) {
+            std::cout << char(c - 7);
         }
-
-        std::cout << std::endl;
+        std::cout << "\r\n";
     }
-
     return 0;
 }
+
