@@ -1,0 +1,28 @@
+Print HP
+Print SAT
+Print At
+Walk East 50
+Print At
+Print SAT
+Run North 50
+Print At
+Print SAT
+Pick rock 50
+Pick bread 10 3
+Eat bread 1
+Print SAT
+Print Backpack
+Create zombie 5
+Attacked By zombie
+Print HP
+Attacked By zombie
+Print HP
+Print At
+Print SAT
+Run East 50
+Run North 50
+Print Backpack
+Sleep
+Attacked By zombie
+Attacked By zombie
+Print At
