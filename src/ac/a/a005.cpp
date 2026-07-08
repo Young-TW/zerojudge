@@ -1,23 +1,21 @@
-#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
 
 int main() {
-    int n[5], t;
-    std::cin >> t;
-    while (t > 0) {
-        std::cin >> n[1] >> n[2] >> n[3] >> n[4];
-        if (n[4] - n[3] != n[3] - n[2]) {
-            n[5] = n[4] * (n[4] / n[3]);
-            std::cout << n[1] << " " << n[2] << " " << n[3] << " " << n[4]
-                      << " " << n[5] << "\n";
-        } else if (n[4] - n[3] == n[3] - n[2]) {
-            n[5] = n[4] + (n[4] - n[3]);
-            std::cout << n[1] << " " << n[2] << " " << n[3] << " " << n[4]
-                      << " " << n[5] << "\n";
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int t;
+    if (!(cin >> t)) return 0;
+    while (t--) {
+        long long a, b, c, d;
+        cin >> a >> b >> c >> d;
+        long long e;
+        if (b - a == c - b && c - b == d - c) {
+            e = d + (d - c);
+        } else {
+            e = d * (d / c);
         }
-
-        n[1] = n[2] = n[3] = n[4] = n[5] = 0;
-        t = t - 1;
+        cout << a << " " << b << " " << c << " " << d << " " << e << "\n";
     }
-
     return 0;
 }
