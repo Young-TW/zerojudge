@@ -1,0 +1,19 @@
+HP:10
+SAT:10
+At:(0,0)
+At:(50,0)
+SAT:9
+At:(50,50)
+SAT:7
+SAT:10
+Backpack:
+rock 50
+bread 9
+HP:5
+HP:10
+At:(0,0)
+SAT:10
+Backpack:
+rock 50
+bread 9
+At:(50,50)
