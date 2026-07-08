@@ -53,11 +53,18 @@ def main():
 
 
 def run_pre_commit():
-    """Hook mode：檢查 staged 的 src/ac/*.cpp，圖片題 exit 1 擋下 commit。"""
+    """Hook mode：檢查 staged 的 src/ac/*.cpp，圖片題 exit 1 擋下 commit。
+
+    只擋「新增」(A) 跟「修改」(M)：
+    - A (新增)：圖片題 subagent 看不到，不該從無到有生出來
+    - M (修改)：圖片題 OJ AC 解不該被 subagent 改
+
+    不擋 D (刪除) / R (改名)：搬走是對的（例如回 src/doing/）
+    """
     import subprocess
     try:
         staged = subprocess.run(
-            ["git", "diff", "--cached", "--name-only", "--diff-filter=AM"],
+            ["git", "diff", "--cached", "--name-status"],
             capture_output=True, text=True, check=True, cwd=ROOT,
         ).stdout.splitlines()
     except subprocess.CalledProcessError:
@@ -65,14 +72,20 @@ def run_pre_commit():
 
     blocked = []
     warned = []
-    for path in staged:
+    for line in staged:
+        parts = line.split("\t")
+        if len(parts) < 2:
+            continue
+        status, path = parts[0], parts[-1]
+        if status in ("D",):
+            continue
         m = re.match(r"src/ac/[^/]+/([a-z]\d+)\.cpp$", path)
         if not m:
             continue
         pid = m.group(1)
         cpp = ROOT / path
         if has_image(pid):
-            blocked.append((pid, path, "圖片題（problem.md 有 <img / ![]()），subagent 看不到圖，不應自動修"))
+            blocked.append((pid, path, f"圖片題 {status}（problem.md 有 <img / ![]()），subagent 看不到圖，不應自動碰"))
         if no_input(cpp):
             warned.append((pid, path, "沒讀輸入"))
 
@@ -84,6 +97,7 @@ def run_pre_commit():
             print(f"  {pid}  ({path})", file=sys.stderr)
             print(f"    原因：{reason}", file=sys.stderr)
             print(f"    解法：git reset HEAD {path}，然後手動處理或跳過這題", file=sys.stderr)
+            print(f"          或 git commit --no-verify 強制跳過 hook", file=sys.stderr)
         print("=" * 50, file=sys.stderr)
         sys.exit(1)
 
