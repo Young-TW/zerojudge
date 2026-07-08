@@ -16,6 +16,12 @@ PROB="$ROOT/problems"
 CXX="${CXX:-g++}"
 CXXFLAGS="${CXXFLAGS:--std=c++17 -O2 -I$ROOT}"
 TIMEOUT="${TIMEOUT:-5}"
+# macOS 沒附 GNU timeout；以 perl 當可移植的 fallback
+if ! command -v timeout >/dev/null 2>&1; then
+  timeout() {
+    perl -e 'alarm shift; exec @ARGV' "$@"
+  }
+fi
 # 編譯產物與暫存全部丟 RAM（tmpfs），跑完即刪。優先 /dev/shm，否則 $TMPDIR/tmp。
 for _r in "${TMPDIR:-}" /dev/shm /tmp; do
   [ -n "$_r" ] && [ -d "$_r" ] && [ -w "$_r" ] && { RAMBASE="$_r"; break; }
