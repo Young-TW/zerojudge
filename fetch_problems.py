@@ -80,7 +80,7 @@ def parse(pid, t):
         hn = re.match(r'範例輸入\s*#?\s*(\d*)', head)
         ho = re.match(r'範例輸出\s*#?\s*(\d*)', head)
         pre = re.search(r'<pre[^>]*>(.*?)</pre>', body, re.S)
-        preval = html.unescape(re.sub(r'<[^>]+>', '', pre.group(1))) if pre else ''
+        preval = html.unescape(re.sub(r'<[^>]+>', '', pre.group(1))).replace('\r', '') if pre else ''
         if hn:
             n_in += 1
             samples.setdefault(hn.group(1) or str(n_in), {})['in'] = preval
