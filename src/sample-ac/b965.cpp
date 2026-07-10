@@ -24,34 +24,35 @@ int main() {
     std::cin.tie(nullptr);
 
     int R, C, M;
-    std::cin >> R >> C >> M;
+    // multiple test cases until EOF (same judge family as b266)
+    while (std::cin >> R >> C >> M) {
+        Matrix b(R, std::vector<int>(C));
+        for (int i = 0; i < R; ++i)
+            for (int j = 0; j < C; ++j)
+                std::cin >> b[i][j];
 
-    Matrix b(R, std::vector<int>(C));
-    for (int i = 0; i < R; ++i)
-        for (int j = 0; j < C; ++j)
-            std::cin >> b[i][j];
+        std::vector<int> ops(M);
+        for (int k = 0; k < M; ++k)
+            std::cin >> ops[k];
 
-    std::vector<int> ops(M);
-    for (int k = 0; k < M; ++k)
-        std::cin >> ops[k];
-
-    // undo: apply inverse operations in reverse order
-    for (int k = M - 1; k >= 0; --k) {
-        if (ops[k] == 1)
-            b = flip(b);
-        else
-            b = rotateCCW(b);
-    }
-
-    int nr = b.size();
-    int nc = b[0].size();
-    std::cout << nr << ' ' << nc << '\n';
-    for (int i = 0; i < nr; ++i) {
-        for (int j = 0; j < nc; ++j) {
-            if (j) std::cout << ' ';
-            std::cout << b[i][j];
+        // undo: apply inverse operations in reverse order
+        for (int k = M - 1; k >= 0; --k) {
+            if (ops[k] == 1)
+                b = flip(b);
+            else
+                b = rotateCCW(b);
         }
-        std::cout << '\n';
+
+        int nr = b.size();
+        int nc = b[0].size();
+        std::cout << nr << ' ' << nc << '\n';
+        for (int i = 0; i < nr; ++i) {
+            for (int j = 0; j < nc; ++j) {
+                if (j) std::cout << ' ';
+                std::cout << b[i][j];
+            }
+            std::cout << '\n';
+        }
     }
 
     return 0;
