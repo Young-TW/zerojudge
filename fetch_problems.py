@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import re, os, sys, html, time, urllib.request, glob
 
-ROOT = "/home/young/code/Young-TW/zerojudge"
+ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "problems")
 UA = "Mozilla/5.0 (zerojudge-local-sample-fetcher)"
 
@@ -75,15 +75,18 @@ def parse(pid, t):
     ps = panels(t)
     sections = {}
     samples = {}  # n -> [in, out]
+    n_in = n_out = 0  # 舊題的範例標題可能不帶編號，依出現順序補號
     for head, body in ps:
-        hn = re.match(r'範例輸入\s*#?(\d+)', head)
-        ho = re.match(r'範例輸出\s*#?(\d+)', head)
+        hn = re.match(r'範例輸入\s*#?\s*(\d*)', head)
+        ho = re.match(r'範例輸出\s*#?\s*(\d*)', head)
         pre = re.search(r'<pre[^>]*>(.*?)</pre>', body, re.S)
         preval = html.unescape(re.sub(r'<[^>]+>', '', pre.group(1))) if pre else ''
         if hn:
-            samples.setdefault(hn.group(1), {})['in'] = preval
+            n_in += 1
+            samples.setdefault(hn.group(1) or str(n_in), {})['in'] = preval
         elif ho:
-            samples.setdefault(ho.group(1), {})['out'] = preval
+            n_out += 1
+            samples.setdefault(ho.group(1) or str(n_out), {})['out'] = preval
         elif head in ('內容', '輸入說明', '輸出說明'):
             sections[head] = html_to_text(body)
     return title, sections, samples
