@@ -1,6 +1,11 @@
 #include <iostream>
-#include <numeric>
 #include <cstdlib>
+
+// 手寫 gcd：ZeroJudge 編譯器較舊，無 C++17 的 std::gcd
+static long long igcd(long long a, long long b) {
+    while (b) { long long t = a % b; a = b; b = t; }
+    return a < 0 ? -a : a;
+}
 
 int main() {
     long long a, b, c, d;
@@ -26,7 +31,7 @@ int main() {
                 break;
         }
         if (q < 0) { p = -p; q = -q; }
-        long long g = std::gcd(std::llabs(p), q);
+        long long g = igcd(std::llabs(p), q);
         if (g != 0) { p /= g; q /= g; }
         if (q == 1 || p == 0) {
             std::cout << p << '\n';
