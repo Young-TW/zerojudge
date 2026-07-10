@@ -1,7 +1,7 @@
 #include <iostream>
 
 int main() {
-    int n[5], t;
+    int n[6], t;
     std::cin >> t;
     while (t > 0) {
         std::cin >> n[1] >> n[2] >> n[3] >> n[4];
