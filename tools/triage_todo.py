@@ -14,7 +14,7 @@ import re
 import subprocess
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent  # repo 根目錄（本檔在 tools/）
 PROB = ROOT / "problems"
 
 IMG_RE = re.compile(r"!\[[^\]]*\]\([^)]*\)")

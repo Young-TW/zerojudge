@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import re, os, sys, html, time, urllib.request, glob
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repo 根目錄（本檔在 tools/）
 OUT = os.path.join(ROOT, "problems")
 UA = "Mozilla/5.0 (zerojudge-local-sample-fetcher)"
 

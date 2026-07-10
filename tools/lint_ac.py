@@ -10,7 +10,7 @@
 import os, re, sys, json
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent  # repo 根目錄（本檔在 tools/）
 SRC_AC = ROOT / "src" / "ac"
 PROBLEMS = ROOT / "problems"
 
