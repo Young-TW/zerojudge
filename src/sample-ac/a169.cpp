@@ -116,7 +116,11 @@ int main() {
         int L, R;
         L = (lc == '[') ? 2 * a : 2 * a + 1;
         R = (rc == ']') ? 2 * b : 2 * b - 1;
-        if (L > R) continue; // empty interval, no effect (e.g. (x,x))
+        if (L > R) {
+            // 空區間 T：U/D/S 對 S 無影響；但 I(S∩∅=∅) 與 C(∅-S=∅) 須清空整個 S
+            if (op == 'I' || op == 'C') st.update(1, 0, MAXC - 1, 0, MAXC - 1, 0);
+            continue;
+        }
         switch (op) {
             case 'U': // S = S ∪ T  : set [L,R] to 1
                 st.update(1, 0, MAXC - 1, L, R, 1);

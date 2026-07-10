@@ -21,8 +21,7 @@ int main() {
             } else if (c == ' ') {
                 cout << c;
             } else if (c == ',') {
-                cout << c;
-                start = false;
+                cout << c;  // 逗號非句子分隔符，不影響句首旗標
             } else {
                 if (start) {
                     cout << (char)toupper((unsigned char)c);

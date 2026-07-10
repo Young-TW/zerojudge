@@ -41,7 +41,7 @@ int main() {
                     if ((rel[X] - rel[Y] + 3) % 3 != 1) ans++;
                 } else {
                     parent[rx] = ry;
-                    rel[rx] = (rel[Y] - rel[X] + 1) % 3;
+                    rel[rx] = (rel[Y] - rel[X] + 4) % 3;  // +4 保證非負（C++ 負數取模坑）
                 }
             }
         }

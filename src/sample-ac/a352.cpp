@@ -32,24 +32,34 @@ int main(){
         }
         int S,T;
         cin >> S >> T;
-        // Build reduced Laplacian: nodes 1..N except T.
-        // Map node -> index.
+        // 只保留 S 所在連通分量的節點：孤立/不連通節點會使 Laplacian 奇異(nan)
+        vector<char> reach(N+1, 0);
+        {
+            vector<int> stk = {S};
+            reach[S] = 1;
+            while(!stk.empty()){
+                int u = stk.back(); stk.pop_back();
+                for(int v=1; v<=N; v++)
+                    if(!reach[v] && g[u][v]!=0.0){ reach[v]=1; stk.push_back(v); }
+            }
+        }
+        // Build reduced Laplacian: 連通分量內、除 T 以外的節點。
         vector<int> idx(N+1,-1);
         int n=0;
         for(int v=1; v<=N; v++){
-            if(v==T) continue;
+            if(v==T || !reach[v]) continue;
             idx[v]=n++;
         }
         // A: n x n
         vector<vector<double>> A(n, vector<double>(n, 0.0));
         for(int u=1; u<=N; u++){
-            if(u==T) continue;
+            if(u==T || !reach[u]) continue;
             int i=idx[u];
             A[i][i] = diag[u];
             for(int v=1; v<=N; v++){
                 if(v==u) continue;
                 if(g[u][v]!=0.0){
-                    if(v==T) continue; // grounded
+                    if(v==T || idx[v]<0) continue; // grounded 或不在分量內
                     int j=idx[v];
                     A[i][j] -= g[u][v];
                 }

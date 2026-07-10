@@ -55,7 +55,9 @@ pair<int,int> parseExpr() {
 
 int main() {
     int L;
-    while (cin >> L >> s) {
+    while (cin >> L) {
+        if (L > 0) cin >> s;   // L=0 時運算子行為空，不可用 cin>>s（會誤讀下一筆）
+        else s = "";
         pos = 0;
         n = (int)s.size();
         pair<int,int> r = parseExpr();
