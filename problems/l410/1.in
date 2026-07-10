@@ -1,0 +1,15 @@
+file manager add folder abc
+abc add file book
+abc cut book
+abc add folder others
+others paste book
+file manager paste book
+file manager add folder me
+fire manager copy me
+abc paste me
+book add dictionary
+book copy dictionary
+abc delete dictionary
+abc add dictionary
+stop
+abc

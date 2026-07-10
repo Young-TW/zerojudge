@@ -1,0 +1,6 @@
+5
+sam book x1 y1 x2 y2
+sam cancel x2 x2
+mike cancel x1 y1
+mike book x1 y1
+stop

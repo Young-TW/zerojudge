@@ -1,0 +1,6 @@
+SET C A
+LS B A
+LS C 1
+SET D 1
+XOR D C
+ANS D

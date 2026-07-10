@@ -1,0 +1,18 @@
+Test Case 1:
+A: {abcdef}
+B: {cefhi}
+A+B: {abcdefhi}
+A*B: {cef}
+A-B: {abd}
+B-A: {hi}
+A does not contain B
+B does not contain A
+Test Case 2:
+A: {34abcef}
+B: {34}
+A+B: {34abcef}
+A*B: {34}
+A-B: {abcef}
+B-A: {}
+A contains B
+B does not contain A

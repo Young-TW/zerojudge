@@ -1,0 +1,8 @@
+insert "Name" "Alan"
+insert "Age" "19"
+insert "Score" newJSONObject
+insert "Math" "98"
+insert "Physics" "100"
+end
+insert "Gender" "male"
+end

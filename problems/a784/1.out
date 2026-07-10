@@ -1,0 +1,2 @@
+min = a if( a < min );
+r0 = - b*c – sqrt( 3*a – c*c/17 ) if( 4*a*c – b*b < 32*c + 9 );

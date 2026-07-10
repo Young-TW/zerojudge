@@ -1,0 +1,15 @@
+show
+create A FOLD
+create B FOLD
+show
+create A DATA
+show
+copy A
+cut A
+show
+move B
+show
+pasta
+show
+return
+show

@@ -1,0 +1,33 @@
+輸入範例 1：
+Subject: 經濟風暴
+Date: 11 20 10 2008
+ID: 1
+
+Subject: 美國總統當選人
+Date: 11 19 12 2008
+ID: 12
+
+Subject: Re: 經濟風暴
+Date: 11 21 20 2008
+ID: 34
+
+Subject: Re: 美國總統當選人
+Date: 11 22 13 2008
+ID: 98
+
+輸入範例 2：
+Subject: 失業率升高
+Date: 11 28 10 2008
+ID: 1
+
+Subject: 美國總統當選人
+Date: 11 19 12 2008
+ID: 12
+
+Subject: 經濟風暴
+Date: 11 21 20 2008
+ID: 34
+
+Subject: Re: 美國總統當選人
+Date: 11 22 13 2008
+ID: 98

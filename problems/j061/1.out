@@ -1,0 +1,19 @@
+Case 1:
+#include<string.h>
+#include<stdio.h>
+int main()
+{
+printf("\"I like to solve\"\n");
+printf("I do not like to code\n");
+printf("\n");
+return 0;
+}
+Case 2:
+#include<string.h>
+#include<stdio.h>
+int main()
+{
+printf("yeah accepted\n");
+printf("\n");
+return 0;
+}

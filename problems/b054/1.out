@@ -1,0 +1,28 @@
+Input a value: 10
+                 Exponent lst byte 2nd byte 3rd byte
+Memory Contents= 10000100 00100000 00000000 00000000  
+                 <&H84>   <&H20>   <&H00>   <&H00>
+FLOATING POINT FORMAT => 0.101000000000000000000000 * 2 ^ 4
+Floating Point Value = 10
+=================================================================
+Input a value: 0.05
+                 Exponent lst byte 2nd byte 3rd byte
+Memory Contents= 01111100 01001100 11001100 11001100
+                 <&H7C>   <&H4C>   <&HCC>   <&HCC>
+FLOATING POINT FORMAT => 0.110011001100110011001100 * 2 ^ -4 
+Floating Point Value = 0.05
+=================================================================
+Input a value: -10
+                 Exponent lst byte 2nd byte 3rd byte
+Memory Contents= 10000100 10100000 00000000 00000000  
+                 <&H84>   <&HA0>   <&H00>   <&H00>
+FLOATING POINT FORMAT => -0.101000000000000000000000 * 2 ^ 4 
+Floating Point Value = -10
+=================================================================
+Input a value: -20.125
+                 Exponent lst byte 2nd byte 3rd byte
+Memory Contents= 10000101 10100001 00000000 00000000  
+                 <&H85>   <&HA1>   <&H00>   <&H00>
+FLOATING POINT FORMAT => -0.101000010000000000000000 * 2 ^ 5 
+Floating Point Value = -20.125 
+=================================================================

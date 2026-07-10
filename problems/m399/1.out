@@ -1,0 +1,9 @@
+SET C A
+MUL C B C
+LS C 1
+OR D A C
+DIV E C D
+SUB F E A
+ADD G F D
+SUB H G B
+ANS H

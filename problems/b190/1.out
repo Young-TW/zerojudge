@@ -1,0 +1,12 @@
+ring 1 : a -> b
+ring 2 : a -> c
+ring 1 : b -> c
+ring 3 : a -> b
+ring 1 : c -> a
+ring 2 : c -> b
+ring 1 : a -> b
+ring 4 : a -> c
+ring 1 : b -> a
+ring 2 : b -> c
+ring 1 : a -> b
+共移動了 11 步

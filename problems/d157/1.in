@@ -1,0 +1,8 @@
+Paper,Scissors,Scissors
+Scissors,Stone,Paper
+Stone,Scissors,Scissors
+@#$%,Scissors,Stone
+Paper,Paper,Scissors
+Stone,Scissors,Scissors
+Game Over
+End

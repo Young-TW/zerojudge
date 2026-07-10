@@ -1,0 +1,14 @@
+pangfeng
+replace g d
+remove n
+addhead a
+addtail s
+end
+pangfeng
+replace g d
+remove n
+addhead a
+addtail s
+addpangfeng b
+addhead a
+end

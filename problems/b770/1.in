@@ -1,0 +1,8 @@
+print
+insert left g 2
+insert right e 1
+insert 3 l 1
+insert 2 o 2
+print
+insert 4 o 25
+print

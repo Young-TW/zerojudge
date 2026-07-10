@@ -1,0 +1,7 @@
+SET C A
+MUL C B
+LS C 1
+OR C A
+DIV C B
+XOR C A
+ANS C
