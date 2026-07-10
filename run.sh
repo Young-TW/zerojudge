@@ -98,15 +98,27 @@ run_one() {
   fi
 }
 
+solved_ids() {
+  find "$ROOT/src" -name '*.cpp' -exec basename {} .cpp \; | grep -E '^[a-z][0-9]+$' | sort -u
+}
+problem_ids() {
+  ls "$PROB" | grep -E '^[a-z][0-9]+$' | sort
+}
+
+if [ "${1:-}" = "--todo" ]; then
+  # 列出還沒有解答檔的題號
+  comm -23 <(problem_ids) <(solved_ids)
+  exit 0
+fi
+
 if [ "$#" -gt 0 ]; then
   ids=("$@")
 else
-  # 所有有範例測資資料夾的題號
+  # 所有有解答檔的題號（src/**/*.cpp 檔名，去重排序）
   ids=()
-  for d in "$PROB"/*/; do
-    id=$(basename "$d"); case "$id" in .*) continue;; esac
+  while IFS= read -r id; do
     ids+=("$id")
-  done
+  done < <(solved_ids)
 fi
 
 for id in "${ids[@]}"; do run_one "$id"; done
@@ -115,5 +127,8 @@ echo "----------------------------------------"
 printf "%s題目 %d｜通過測資 %s%d%s｜失敗 %s%d%s｜編譯錯誤 %s%d%s｜略過 %s%d%s%s\n" \
   "$B" "$TOT_PROB" "$G" "$TOT_PASS" "$N" "$R" "$TOT_FAIL" "$N" \
   "$R" "$TOT_CE" "$N" "$Y" "$TOT_SKIP" "$N" "$B$N"
+if [ "$#" -eq 0 ]; then
+  printf "未解 %s%d%s 題（./run.sh --todo 列清單）\n" "$Y" "$(comm -23 <(problem_ids) <(solved_ids) | wc -l | tr -d ' ')" "$N"
+fi
 
 [ "$TOT_FAIL" -eq 0 ] && [ "$TOT_CE" -eq 0 ]
