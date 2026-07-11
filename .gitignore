@@ -7,3 +7,5 @@ __pycache__/
 # 對拍：模型生成的暴力解與反例不進版控
 problems/*/brute.*
 problems/*/counter.*
+# Agent 記憶鏡像（含環境/帳號資訊，絕不進 git）
+/.agent-memory/
