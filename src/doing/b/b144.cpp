@@ -7,47 +7,52 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int n;
-    while(cin >> n){
-        vector<pair<int,int>> nb(n+1);
+    while(cin>>n){
+        vector<int> a(n+1), b(n+1);
         for(int i=1;i<=n;i++){
-            cin >> nb[i].first >> nb[i].second;
+            cin>>a[i]>>b[i];
         }
-        vector<int> c(n);
-        c[0] = 1;
-        c[1] = nb[1].first;
-        bool ok = true;
-        for(int i=1;i<n-1;i++){
-            int s = c[i], pr = c[i-1];
-            if(nb[s].first!=pr && nb[s].second!=pr){ ok=false; break; }
-            c[i+1] = (nb[s].first==pr) ? nb[s].second : nb[s].first;
+        bool ok=true;
+        for(int i=1;i<=n;i++){
+            int x=a[i], y=b[i];
+            if(x<1||x>n||y<1||y>n||x==y||x==i||y==i){ ok=false; break; }
+            if(a[x]!=i && b[x]!=i){ ok=false; break; }
+            if(a[y]!=i && b[y]!=i){ ok=false; break; }
         }
-        if(ok){
-            vector<int> seen(n+1, 0);
-            for(int i=0;i<n;i++){
-                if(c[i]<1 || c[i]>n || seen[c[i]]){ ok=false; break; }
-                seen[c[i]] = 1;
+        if(!ok){ cout<<-1<<"\n"; continue; }
+        vector<int> cyc;
+        cyc.reserve(n);
+        vector<char> vis(n+1,0);
+        int cur=1, prevv=-1;
+        bool fail=false;
+        for(int i=0;i<n;i++){
+            if(vis[cur]){ fail=true; break; }
+            vis[cur]=1;
+            cyc.push_back(cur);
+            int next = (a[cur]!=prevv) ? a[cur] : b[cur];
+            prevv=cur;
+            cur=next;
+        }
+        if(fail||cur!=1){ cout<<-1<<"\n"; continue; }
+        
+        auto countMax=[&](vector<int>& c){
+            vector<int> cnt(n,0);
+            for(int j=0;j<n;j++){
+                int s=c[j];
+                int r=((j-(s-1))%n+n)%n;
+                cnt[r]++;
             }
-        }
-        if(ok){
-            for(int i=0;i<n;i++){
-                int s=c[i], left=c[(i-1+n)%n], right=c[(i+1)%n];
-                int a=nb[s].first, b=nb[s].second;
-                if(!((a==left&&b==right)||(a==right&&b==left))){ ok=false; break; }
-            }
-        }
-        if(!ok){ cout << -1 << "\n"; continue; }
-        vector<int> pos(n+1);
-        for(int i=0;i<n;i++) pos[c[i]] = i;
-        vector<int> cnt(n,0), cnt2(n,0);
-        for(int s=1;s<=n;s++){
-            int r = ((pos[s]-s+1)%n+n)%n;
-            cnt[r]++;
-            int r2 = ((-pos[s]-s+1)%n+n)%n;
-            cnt2[r2]++;
-        }
-        int maxf=0;
-        for(int i=0;i<n;i++){ maxf=max(maxf,cnt[i]); maxf=max(maxf,cnt2[i]); }
-        cout << (n-maxf) << "\n";
+            int mx=0;
+            for(int x:cnt) mx=max(mx,x);
+            return mx;
+        };
+        
+        int m1=countMax(cyc);
+        vector<int> rev(n);
+        rev[0]=cyc[0];
+        for(int j=1;j<n;j++) rev[j]=cyc[n-j];
+        int m2=countMax(rev);
+        cout<<n-max(m1,m2)<<"\n";
     }
     return 0;
 }
