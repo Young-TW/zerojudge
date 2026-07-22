@@ -9,3 +9,11 @@ problems/*/brute.*
 problems/*/counter.*
 # Agent 記憶鏡像（含環境/帳號資訊，絕不進 git）
 /.agent-memory/
+# 提交產線腳本(Safari 自動化,含帳號機制,絕不進 git)
+/submit/
+# 提交判定 runtime log(reconcile/orchestrator 追寫,非版控內容)
+/src/safari_submit.log
+# 產線運維工具+記憶(敏感:含帳號/VM/端點,絕不進 git,自行同步)
+/ops/
+# sample-ac 是未驗證本地解工作池(大多非真AC),不進版控;真AC 由 promote 進 src/ac
+/src/sample-ac/
