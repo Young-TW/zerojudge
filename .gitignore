@@ -7,6 +7,8 @@ __pycache__/
 # 對拍：模型生成的暴力解與反例不進版控
 problems/*/brute.*
 problems/*/counter.*
+# 視覺轉述(模型讀圖產物,非答案),不進 git
+problems/*/img_desc.txt
 # Agent 記憶鏡像（含環境/帳號資訊，絕不進 git）
 /.agent-memory/
 # 提交產線腳本(Safari 自動化,含帳號機制,絕不進 git)
