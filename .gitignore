@@ -19,3 +19,6 @@ problems/*/img_desc.txt
 /ops/
 # sample-ac 是未驗證本地解工作池(大多非真AC),不進版控;真AC 由 promote 進 src/ac
 /src/sample-ac/
+# 樣本汙染修復的原始備份(本機復原用,非答案)
+problems/*/orig_samples/
+problems/*/*.orig
