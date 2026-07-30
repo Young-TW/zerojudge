@@ -22,3 +22,9 @@ problems/*/img_desc.txt
 # 樣本汙染修復的原始備份(本機復原用,非答案)
 problems/*/orig_samples*/
 problems/*/*.orig
+
+# 根目錄對拍/暫存 scratch(不進 git)
+/b579_*
+/tmp_*/
+/*_brute
+/*_sol

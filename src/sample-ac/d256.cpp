@@ -1,23 +1,19 @@
 #include <iostream>
 
-using namespace std;
-
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
     int T;
-    while (cin >> T) {
-        while (T--) {
-            long long G, L;
-            cin >> G >> L;
-            if (L % G == 0) {
-                cout << G << " " << L << "\n";
-            } else {
-                cout << -1 << "\n";
-            }
+    if (!(std::cin >> T)) return 0;
+    while (T--) {
+        long long G, L;
+        std::cin >> G >> L;
+        if (L % G == 0) {
+            std::cout << G << ' ' << L << '\n';
+        } else {
+            std::cout << -1 << '\n';
         }
     }
-    
     return 0;
 }

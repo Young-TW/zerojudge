@@ -52,6 +52,8 @@ struct LCA {
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
+    ostringstream _oss;                       // 緩衝輸出,結尾去除多餘空白(ZeroJudge尾空行→OLE,c092教訓)
+    streambuf* _old = cout.rdbuf(_oss.rdbuf());
     int n, m;
     bool firstCase = true;
     while (cin >> n >> m) {
@@ -106,5 +108,10 @@ int main() {
         }
         cout << "\n";
     }
+    cout.rdbuf(_old);
+    string _s = _oss.str();
+    while (!_s.empty() && (_s.back() == '\n' || _s.back() == ' ' || _s.back() == '\r' || _s.back() == '\t'))
+        _s.pop_back();
+    cout << _s;
     return 0;
 }

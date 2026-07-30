@@ -2,275 +2,226 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <sstream>
+#include <queue>
 #include <algorithm>
-
+#include <cstdint>
+#include <sstream>
+#include <set>
 using namespace std;
 
-struct Person {
-    string name;
-    string father;
-    vector<int> path; // Path indices from root
-    bool visited;
-};
-
-map<string, Person> people;
-map<string, vector<string>> children_order;
-const string VIRTUAL_ROOT = "__VIRTUAL_ROOT__";
-
-string trim(const string& s) {
-    size_t start = s.find_first_not_of(" \t\r\n");
-    if (start == string::npos) return "";
-    size_t end = s.find_last_not_of(" \t\r\n");
-    return s.substr(start, end - start + 1);
+bool is_cjk(uint32_t cp) {
+    return (cp >= 0x4E00 && cp <= 0x9FFF) ||
+           (cp >= 0x3400 && cp <= 0x4DBF) ||
+           (cp >= 0xF900 && cp <= 0xFAFF);
 }
 
-string parse_name(string s) {
-    s = trim(s);
-    while (!s.empty() && (s.back() == ',' || s.back() == '。' || s.back() == '.' || s.back() == ' ')) {
-        s.pop_back();
+string filter_cjk(const string& s) {
+    string res;
+    size_t i = 0;
+    while (i < s.size()) {
+        unsigned char c = s[i];
+        if (c < 0x80) { ++i; continue; }
+        if ((c & 0xE0) == 0xC0) { i += 2; continue; }
+        if ((c & 0xF0) == 0xE0) {
+            if (i + 2 < s.size()) {
+                uint32_t cp = ((c & 0x0F) << 12) | ((s[i+1] & 0x3F) << 6) | (s[i+2] & 0x3F);
+                if (is_cjk(cp)) res += s.substr(i, 3);
+            }
+            i += 3;
+            continue;
+        }
+        if ((c & 0xF8) == 0xF0) { i += 4; continue; }
+        ++i;
     }
-    while (!s.empty() && (s.front() == ' ')) {
-        s.erase(0, 1);
+    return res;
+}
+
+vector<string> extract_cjk_words(const string& s) {
+    vector<string> words;
+    size_t i = 0;
+    while (i < s.size()) {
+        while (i < s.size()) {
+            unsigned char c = s[i];
+            if (c < 0x80) { ++i; continue; }
+            if ((c & 0xE0) == 0xC0) { i += 2; continue; }
+            if ((c & 0xF0) == 0xE0) {
+                if (i + 2 < s.size()) {
+                    uint32_t cp = ((c & 0x0F) << 12) | ((s[i+1] & 0x3F) << 6) | (s[i+2] & 0x3F);
+                    if (is_cjk(cp)) break;
+                }
+                i += 3;
+                continue;
+            }
+            if ((c & 0xF8) == 0xF0) { i += 4; continue; }
+            ++i;
+        }
+        if (i >= s.size()) break;
+        string word;
+        while (i < s.size()) {
+            unsigned char c = s[i];
+            if (c < 0x80) break;
+            if ((c & 0xE0) == 0xC0) break;
+            if ((c & 0xF0) == 0xE0) {
+                if (i + 2 < s.size()) {
+                    uint32_t cp = ((c & 0x0F) << 12) | ((s[i+1] & 0x3F) << 6) | (s[i+2] & 0x3F);
+                    if (is_cjk(cp)) {
+                        word += s.substr(i, 3);
+                        i += 3;
+                        continue;
+                    }
+                }
+                break;
+            }
+            if ((c & 0xF8) == 0xF0) break;
+            break;
+        }
+        if (!word.empty()) words.push_back(word);
     }
-    return s;
+    return words;
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
     int n;
-    if (!(cin >> n)) return 0;
-    
-    string line;
-    getline(cin, line); 
+    while (cin >> n) {
+        cin.ignore(1000, '\n');
+        map<string, string> parent;
+        vector<pair<string, vector<string>>> pending_brothers;
+        set<string> all_names;
 
-    vector<string> queries(2);
+        for (int i = 0; i < n; ++i) {
+            string line;
+            getline(cin, line);
+            if (line.empty()) { --i; continue; }
 
-    for (int i = 0; i < n; ++i) {
-        getline(cin, line);
-        line = trim(line);
-        if (line.empty()) continue;
-
-        if (line.find("之父曰") != string::npos) {
-            size_t pos = line.find("之父曰");
-            string a = parse_name(line.substr(0, pos));
-            string b = parse_name(line.substr(pos + 3));
-            
-            if (people.find(a) == people.end()) {
-                people[a] = {a, "", {}, false};
-            }
-            if (people.find(b) == people.end()) {
-                people[b] = {b, "", {}, false};
-            }
-            people[a].father = b;
-        } else if (line.find("之子曰") != string::npos) {
-            size_t pos = line.find("之子曰");
-            string a = parse_name(line.substr(0, pos));
-            string b = parse_name(line.substr(pos + 3));
-            
-            if (people.find(a) == people.end()) {
-                people[a] = {a, "", {}, false};
-            }
-            if (people.find(b) == people.end()) {
-                people[b] = {b, "", {}, false};
-            }
-            people[b].father = a;
-        } else if (line.find("弟") != string::npos && line.find("人") != string::npos) {
-            size_t pos_di = line.find("弟");
-            size_t pos_ren = line.find("人", pos_di);
-            
-            string a = parse_name(line.substr(0, pos_di));
-            if (people.find(a) == people.end()) {
-                people[a] = {a, "", {}, false};
-            }
-            
-            vector<string> bros;
-            bros.push_back(a);
-            
-            string rest = line.substr(pos_ren + 1);
-            size_t pos_ci = 0;
-            while ((pos_ci = rest.find("次曰")) != string::npos) {
-                rest = rest.substr(pos_ci + 2);
-                size_t end_pos = rest.find_first_of(",,.");
-                if (end_pos == string::npos) end_pos = rest.length();
-                
-                string name = parse_name(rest.substr(0, end_pos));
-                if (people.find(name) == people.end()) {
-                    people[name] = {name, "", {}, false};
+            if (line.find("之父曰") != string::npos) {
+                size_t pos = line.find("之父曰");
+                string a = filter_cjk(line.substr(0, pos));
+                string b = filter_cjk(line.substr(pos + 9));
+                if (!a.empty() && !b.empty()) {
+                    parent[a] = b;
+                    all_names.insert(a);
+                    all_names.insert(b);
                 }
-                bros.push_back(name);
-                rest = rest.substr(end_pos);
-                if (rest.empty()) break;
-            }
-            
-            string father_name = people[a].father;
-            if (father_name == "" || people.find(father_name) == people.end()) {
-                father_name = VIRTUAL_ROOT;
-            }
-            
-            for (const string& bro : bros) {
-                // 確保兄弟的父親指向正確，如果之前沒設定或設定為空
-                if (people[bro].father == "" || people[bro].father == VIRTUAL_ROOT) {
-                     if (father_name != VIRTUAL_ROOT) {
-                         people[bro].father = father_name;
-                     } else {
-                         // 如果掛在虛擬根下，父親保持空或設為虛擬根？
-                         // 為了 path 計算，設為 VIRTUAL_ROOT 比較好追蹤，但最終輸出不要這個父親。
-                         // 這裡我們只在 children_order 中使用 VIRTUAL_ROOT。
-                         // people[bro].father 保持空，表示他是根。
-                     }
+            } else if (line.find("之子曰") != string::npos) {
+                size_t pos = line.find("之子曰");
+                string a = filter_cjk(line.substr(0, pos));
+                string b = filter_cjk(line.substr(pos + 9));
+                if (!a.empty() && !b.empty()) {
+                    parent[b] = a;
+                    all_names.insert(a);
+                    all_names.insert(b);
                 }
+            } else if (line.find("弟") != string::npos) {
+                size_t pos_di = line.find("弟");
+                string a = filter_cjk(line.substr(0, pos_di));
+                vector<size_t> ci_pos;
+                size_t pos = line.find("次曰");
+                while (pos != string::npos) {
+                    ci_pos.push_back(pos);
+                    pos = line.find("次曰", pos + 1);
+                }
+                vector<string> brothers;
+                for (size_t j = 0; j < ci_pos.size(); ++j) {
+                    size_t name_start = ci_pos[j] + 6;
+                    size_t name_end = (j + 1 < ci_pos.size()) ? ci_pos[j+1] : line.length();
+                    string part = line.substr(name_start, name_end - name_start);
+                    string name = filter_cjk(part);
+                    if (!name.empty()) brothers.push_back(name);
+                }
+                pending_brothers.push_back({a, brothers});
+                all_names.insert(a);
+                for (const auto& bro : brothers) all_names.insert(bro);
             }
-            
-            // 將兄弟列表加入 children_order
-            // 注意：如果 father_name 是 VIRTUAL_ROOT，我們统一挂在这里
-            children_order[father_name].insert(children_order[father_name].end(), bros.begin(), bros.end());
+        }
+
+        string query_line;
+        getline(cin, query_line);
+        while (query_line.empty()) getline(cin, query_line);
+        vector<string> query_names = extract_cjk_words(query_line);
+        string o, p;
+        if (query_names.size() >= 2) {
+            o = query_names[0];
+            p = query_names[1];
         } else {
-            // 可能是查詢行？題目說最後一行是詢問。
-            // 但迴圈是 n 行。題目描述：
-            // 第一行為 n
-            // 接下來 n 行 (定義)
-            // 最後一行有一詢問
-            // 所以總共是 n+1 行？
-            // 範例輸入：
-            // 3
-            // ... (3 行)
-            // 公子光 僚
-            // 是的，詢問在第 n+1 行。
-            // 所以這個 else 可能不會碰到，或者輸入格式有變體？
-            // 題目說 "接下來有 n 行 ... 最後一行有一詢問"。
-            // 這通常意味著總共有 n 行定義，然後額外一行詢問。
-            // 所以這個 for 迴圈只處理 n 行定義。
-            // 詢問在迴圈外讀取。
+            stringstream ss(query_line);
+            ss >> o >> p;
         }
-    }
-    
-    // 讀取詢問
-    string o, p;
-    if (!(cin >> o >> p)) return 0;
-    
-    // 確保查詢的人在 people 中
-    if (people.find(o) == people.end()) people[o] = {o, "", {}, false};
-    if (people.find(p) == people.end()) people[p] = {p, "", {}, false};
-    
-    // 如果有未掛載的根節點（沒有父親，也沒在任何兄弟群組中），將它們掛到 VIRTUAL_ROOT
-    for (auto& kv : people) {
-        if (kv.second.father == "") {
-            // 檢查是否已在 children_order[VIRTUAL_ROOT] 中？
-            // 簡單的辦法：如果 father 為空，且沒在任何 children_order 的值中出現過（作為孩子）
-            // 但我們剛才在處理兄弟時，如果 father 為空，已經加入 children_order[VIRTUAL_ROOT] 了。
-            // 這裡處理的是那些單獨的、沒在任何 "弟 m 人" 中出現過的根節點。
-            // 將它們加入 VIRTUAL_ROOT 的列表
-            // 避免重複加入
-            bool found = false;
-            for (const auto& child : children_order[VIRTUAL_ROOT]) {
-                if (child == kv.first) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                children_order[VIRTUAL_ROOT].push_back(kv.first);
-            }
-        }
-    }
-    
-    // BFS 計算 path
-    // Queue stores name
-    vector<string> q;
-    
-    // 初始化 VIRTUAL_ROOT 的孩子
-    if (children_order.find(VIRTUAL_ROOT) != children_order.end()) {
-        int idx = 0;
-        for (const string& child : children_order[VIRTUAL_ROOT]) {
-            if (people.find(child) != people.end()) {
-                people[child].path = {idx};
-                people[child].visited = true;
-                q.push_back(child);
-            }
-            idx++;
-        }
-    }
-    
-    // 還有其他根節點嗎？
-    // 如果一個人 father 為空，且不在 children_order[VIRTUAL_ROOT] 中（上面已處理）
-    // 那他就是孤立的根？
-    // 上面已經把所有 father=="" 的都加入 VIRTUAL_ROOT 了（如果沒在兄弟群組裡）。
-    // 在兄弟群組裡的也加入了。
-    // 所以所有根節點都應該在 q 中了。
-    
-    // 等等，如果一個人 father 不為空，但父親還沒處理？
-    // BFS 會處理。
-    
-    // 但是，如果樹的結構是：A 之父曰 B，B 之父曰 C。
-    // 我們需要先處理 C，再 B，再 A。
-    // 我們的 BFS 從根開始，正好。
-    
-    // 但我們需要確保所有節點都被訪問。
-    // 有些節點可能在 children_order 中作為父親出現，但自己還沒被賦值 path（因為還沒輪到）。
-    // BFS 順序：
-    // 取出 u。
-    // 查找 u 的孩子們 (children_order[u])。
-    // 賦予 path = u.path + [index]。
-    // 放入 queue。
-    
-    int head = 0;
-    while(head < q.size()){
-        string u_name = q[head++];
-        if (children_order.find(u_name) != children_order.end()) {
-            int idx = 0;
-            for (const string& v_name : children_order[u_name]) {
-                if (people.find(v_name) != people.end() && !people[v_name].visited) {
-                    people[v_name].path = people[u_name].path;
-                    people[v_name].path.push_back(idx);
-                    people[v_name].visited = true;
-                    q.push_back(v_name);
-                }
-                idx++;
-            }
-        }
-    }
-    
-    // 檢查是否有未訪問的節點？
-    // 理論上不應該有，因為所有節點都應連接到 VIRTUAL_ROOT。
-    // 如果有孤立節點（father 指向不存在的人，且自己也不是任何人的孩子）？
-    // 題目保證可解。
-    
-    // 比較 o 和 p
-    const vector<int>& path_o = people[o].path;
-    const vector<int>& path_p = people[p].path;
-    
-    // 如果 path 為空？說明沒連上根。
-    // 假設不會發生。
-    
-    // 比較規則：
-    // 1. path 長度短者，輩分大，優先。
-    // 2. 長度相同，逐位比較，小者優先。
-    
-    string winner = "";
-    if (path_o.size() < path_p.size()) {
-        winner = o;
-    } else if (path_p.size() < path_o.size()) {
-        winner = p;
-    } else {
-        for (size_t i = 0; i < path_o.size(); ++i) {
-            if (path_o[i] < path_p[i]) {
-                winner = o;
-                break;
-            } else if (path_p[i] < path_o[i]) {
-                winner = p;
-                break;
-            }
-        }
-        // 如果完全相同？題目保證不會有兩者為同輩且祖父不同，且名字不同。
-        // 如果路徑完全相同，那是同一個人？題目問 o, p 誰前，暗示不同人。
-        // 如果真的是同一人（輸入錯誤？），隨便輸出一個。
-        if (winner == "") winner = o; 
-    }
-    
-    cout << winner << endl;
 
+        vector<pair<string, vector<string>>> brother_info;
+        for (const auto& pb : pending_brothers) {
+            string a = pb.first;
+            vector<string> brothers = pb.second;
+            string f;
+            if (parent.find(a) != parent.end()) f = parent[a];
+            else f = "__root__";
+            parent[a] = f;
+            for (const auto& bro : brothers) parent[bro] = f;
+            vector<string> full;
+            full.push_back(a);
+            for (const auto& bro : brothers) full.push_back(bro);
+            brother_info.push_back({f, full});
+        }
+
+        all_names.insert(o);
+        all_names.insert(p);
+        for (const auto& name : all_names) {
+            if (parent.find(name) == parent.end()) parent[name] = "__root__";
+        }
+
+        map<string, vector<string>> children;
+        for (const auto& bi : brother_info) {
+            const string& f = bi.first;
+            const vector<string>& bros = bi.second;
+            vector<string> old = children[f];
+            children[f].clear();
+            for (const auto& b : bros) children[f].push_back(b);
+            for (const auto& c : old) {
+                if (find(bros.begin(), bros.end(), c) == bros.end())
+                    children[f].push_back(c);
+            }
+        }
+        for (const auto& pr : parent) {
+            const string& child = pr.first;
+            const string& f = pr.second;
+            if (f == "__root__" && child == "__root__") continue;
+            if (f.empty()) continue;
+            auto it = children.find(f);
+            if (it == children.end()) children[f].push_back(child);
+            else {
+                auto& sons = it->second;
+                if (find(sons.begin(), sons.end(), child) == sons.end())
+                    sons.push_back(child);
+            }
+        }
+
+        map<string, vector<int>> path;
+        path["__root__"] = {};
+        queue<string> q;
+        q.push("__root__");
+        while (!q.empty()) {
+            string f = q.front(); q.pop();
+            auto it = children.find(f);
+            if (it != children.end()) {
+                const auto& sons = it->second;
+                for (size_t i = 0; i < sons.size(); ++i) {
+                    string c = sons[i];
+                    path[c] = path[f];
+                    path[c].push_back(i);
+                    q.push(c);
+                }
+            }
+        }
+
+        if (path.find(o) == path.end() || path.find(p) == path.end()) {
+            cout << o << endl;
+            continue;
+        }
+        const auto& po = path[o];
+        const auto& pp = path[p];
+        if (po.size() != pp.size())
+            cout << (po.size() < pp.size() ? o : p) << endl;
+        else
+            cout << (po < pp ? o : p) << endl;
+    }
     return 0;
 }
